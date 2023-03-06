@@ -1,7 +1,5 @@
-﻿using EveriHelixAPI.Infrastructure.Filters;
-using EveriHelixAPI.Services;
+﻿using EveriHelixAPI.Services;
 using EveriHelixAPI.Services.Impl;
-using Microsoft.OpenApi.Models;
 
 namespace EveriHelixAPI.Extensions
 {

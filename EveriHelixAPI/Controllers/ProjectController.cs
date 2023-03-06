@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Diagnostics;
 using System.Net.Mime;
-using System.Reflection;
 
 namespace EveriHelixAPI.Controllers.v1
 {
@@ -22,7 +21,7 @@ namespace EveriHelixAPI.Controllers.v1
             this.helixService = helixService;
         }
 
-        [HttpGet("/projects/")]
+        [HttpGet("projects")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(IList<ProjectList>), 200)]
         [ProducesResponseType(401)]

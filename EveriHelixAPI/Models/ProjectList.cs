@@ -3,14 +3,14 @@
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Project
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string uuid { get; set; }
+        public int id { get; set; } = 0;
+        public string name { get; set; } = String.Empty;
+        public string uuid { get; set; } = String.Empty;
     }
 
     public class ProjectList
     {
-        public List<Project> projects { get; set; }
-        public int projectsLoading { get; set; }
+        public IList<Project> projects { get; set; } = new List<Project>();
+        public int projectsLoading { get; set; } = 0;
     }
 }

@@ -6,8 +6,8 @@ namespace EveriHelixAPI.Services
     {
         Task<ProjectList> GetProjectsAsync();
 
-        Task<RequirementList> GetRequirementsAsync();
+        Task<RequirementList> GetRequirementsAsync(int projectId);
 
-        Task<Requirement> GetRequirementAsync(int id);
+        Task<Requirement> GetRequirementAsync(int projectId, int requirementid);
     }
 }

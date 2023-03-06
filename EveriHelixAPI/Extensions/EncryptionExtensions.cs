@@ -1,7 +1,4 @@
-﻿using Serilog;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Text;
 
 namespace EveriHelixAPI.Extensions
 {

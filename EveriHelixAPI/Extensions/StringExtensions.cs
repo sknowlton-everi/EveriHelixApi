@@ -1,8 +1,4 @@
-﻿using Serilog;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-
-namespace EveriHelixAPI.Extensions
+﻿namespace EveriHelixAPI.Extensions
 {
     public static class StringExtensions
     {

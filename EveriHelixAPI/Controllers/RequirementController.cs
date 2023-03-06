@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Diagnostics;
 using System.Net.Mime;
-using System.Reflection;
 
 namespace EveriHelixAPI.Controllers.v1
 {
@@ -22,30 +21,30 @@ namespace EveriHelixAPI.Controllers.v1
             this.helixService = helixService;
         }
 
-        [HttpGet("/requirements/")]
+        [HttpGet("{projectId}/requirements")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(RequirementList), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync(int projectId)
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 
-            RequirementList result = await helixService.GetRequirementsAsync();
+            RequirementList result = await helixService.GetRequirementsAsync(projectId);
 
             return Ok(result);
         }
 
-        [HttpGet("/requirements/{id}/")]
+        [HttpGet("{projectId}/requirements/{requirementId}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(Requirement), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int projectId, int requirementId)
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 
-            Requirement requirement = await helixService.GetRequirementAsync(id);
+            Requirement requirement = await helixService.GetRequirementAsync(projectId, requirementId);
             if (requirement != null)
             {
                 return Ok(requirement);
@@ -54,6 +53,43 @@ namespace EveriHelixAPI.Controllers.v1
             {
                 return NotFound();
             }
+        }
+
+        [HttpPost("{projectId}/requirements")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(Requirement), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> CreateRequirement(int projectId, Requirement requirement)
+        {
+            Log.Debug($"Executing {new StackTrace().Caller}...");
+
+            return Ok();
+        }
+
+        [HttpPut("{projectId}/requirements")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(Requirement), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> UpdateRequirement(int projectId, Requirement requirement)
+        {
+            Log.Debug($"Executing {new StackTrace().Caller}...");
+
+            return Ok();
+        }
+
+        [HttpDelete("{projectId}/requirements/{requirementId}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(Requirement), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> DeleteRequirement(int projectId, int requirementId)
+        {
+            Log.Debug($"Executing {new StackTrace().Caller}...");
+
+            return Ok();
         }
     }
 }

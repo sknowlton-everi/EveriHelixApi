@@ -1,11 +1,11 @@
-﻿using EveriHelixAPI.Services;
+﻿using EveriHelixAPI.Models;
+using EveriHelixAPI.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Text.Encodings.Web;
 using System.Text;
+using System.Text.Encodings.Web;
 
 namespace EveriHelixAPI.Controllers
 {
@@ -30,10 +30,7 @@ namespace EveriHelixAPI.Controllers
                 username = credentials.FirstOrDefault();
                 string? password = credentials.LastOrDefault();
 
-                if (!userService.ValidateCredentials(username, password))
-                {
-                    throw new ArgumentException("Invalid credentials");
-                }
+                ProjectList projectList = userService.ValidateCredentialsAsync(username, password).Result;
             }
             catch (Exception ex)
             {

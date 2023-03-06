@@ -1,14 +1,4 @@
-﻿using EveriHelixAPI.Infrastructure.Filters;
-using EveriHelixAPI.Models;
-using EveriHelixAPI.Services;
-using EveriHelixAPI.Services.Impl;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.OpenApi.Models;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Json;
-
-namespace EveriHelixAPI.Extensions
+﻿namespace EveriHelixAPI.Extensions
 {
     public static class HelixExtensions
     {

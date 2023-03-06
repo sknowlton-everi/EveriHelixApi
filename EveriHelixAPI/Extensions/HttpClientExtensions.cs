@@ -1,10 +1,4 @@
-﻿using EveriHelixAPI.Infrastructure.Filters;
-using EveriHelixAPI.Services;
-using EveriHelixAPI.Services.Impl;
-using Microsoft.Net.Http.Headers;
-using Microsoft.OpenApi.Models;
-
-namespace EveriHelixAPI.Extensions
+﻿namespace EveriHelixAPI.Extensions
 {
     public static class HttpClientExtensions
     {
