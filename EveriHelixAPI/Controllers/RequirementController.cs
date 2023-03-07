@@ -40,7 +40,7 @@ namespace EveriHelixAPI.Controllers.v1
         [ProducesResponseType(typeof(Requirement), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetById(int projectId, int requirementId)
+        public async Task<IActionResult> GetByIdAsync(int projectId, int requirementId)
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 
@@ -60,7 +60,7 @@ namespace EveriHelixAPI.Controllers.v1
         [ProducesResponseType(typeof(Requirement), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> CreateRequirement(int projectId, Requirement requirement)
+        public async Task<IActionResult> CreateRequirementAsync(int projectId, Requirement requirement)
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 
@@ -73,7 +73,7 @@ namespace EveriHelixAPI.Controllers.v1
         [ProducesResponseType(typeof(Requirement), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> UpdateRequirement(int projectId, Requirement requirement)
+        public async Task<IActionResult> UpdateRequirementAsync(int projectId, Requirement requirement)
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 
@@ -85,7 +85,7 @@ namespace EveriHelixAPI.Controllers.v1
         [ProducesResponseType(typeof(Requirement), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> DeleteRequirement(int projectId, int requirementId)
+        public async Task<IActionResult> DeleteRequirementAsync(int projectId, int requirementId)
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 

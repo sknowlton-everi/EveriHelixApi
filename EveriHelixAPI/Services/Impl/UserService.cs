@@ -1,5 +1,7 @@
 ﻿using EveriHelixAPI.Extensions;
+using EveriHelixAPI.Infrastructure;
 using EveriHelixAPI.Models;
+using Microsoft.Extensions.Options;
 using Serilog;
 using System.Diagnostics;
 using System.Net;
@@ -10,7 +12,12 @@ namespace EveriHelixAPI.Services.Impl
 {
     public class UserService : IUserService
     {
-        private static string HELIX_REST_URL = "https://127.0.0.1:8443/helix-alm/api/v0";
+        private readonly HelixConfig helixConfig;
+
+        public UserService(IOptions<HelixConfig> options)
+        {
+            helixConfig = options.Value;
+        }
 
         public Task<ProjectList> ValidateCredentialsAsync(string username, string password)
         {
@@ -36,7 +43,7 @@ namespace EveriHelixAPI.Services.Impl
             HttpClient httpClient = new HttpClient(clientHandler);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationSchemes.Basic.ToString(), username.getBasicAuth(password));
 
-            HttpResponseMessage response = await httpClient.GetAsync($"{HELIX_REST_URL}/projects");
+            HttpResponseMessage response = await httpClient.GetAsync($"{helixConfig.BaseUrl}/projects");
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();
@@ -58,7 +65,7 @@ namespace EveriHelixAPI.Services.Impl
             HttpClient httpClient = new HttpClient(clientHandler);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationSchemes.Basic.ToString(), username.getBasicAuth(password));
 
-            HttpResponseMessage response = await httpClient.GetAsync($"{HELIX_REST_URL}/{projectId}/token");
+            HttpResponseMessage response = await httpClient.GetAsync($"{helixConfig.BaseUrl}/{projectId}/token");
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();

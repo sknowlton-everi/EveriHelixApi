@@ -1,5 +1,7 @@
 ﻿using EveriHelixAPI.Extensions;
+using EveriHelixAPI.Infrastructure;
 using EveriHelixAPI.Models;
+using Microsoft.Extensions.Options;
 using Serilog;
 using System.Diagnostics;
 using System.Net;
@@ -10,12 +12,11 @@ namespace EveriHelixAPI.Services.Impl
 {
     public class HelixService : IHelixService
     {
-        private static string HELIX_REST_URL = "https://127.0.0.1:8443/helix-alm/api/v0";
-        private static string USERNAME = "Administrator";
-        private static string PASSWORD = "Atilla455";
+        private readonly HelixConfig helixConfig;
 
-        public HelixService()
+        public HelixService(IOptions<HelixConfig> options)
         {
+            helixConfig = options.Value;
         }
 
         public async Task<ProjectList> GetProjectsAsync()
@@ -30,19 +31,15 @@ namespace EveriHelixAPI.Services.Impl
             };
 
             HttpClient httpClient = new HttpClient(clientHandler);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationSchemes.Basic.ToString(), USERNAME.getBasicAuth(PASSWORD));
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationSchemes.Basic.ToString(), helixConfig.GetEncryption());
 
-            HttpResponseMessage response = await httpClient.GetAsync($"{HELIX_REST_URL}/projects");
+            HttpResponseMessage response = await httpClient.GetAsync($"{helixConfig.BaseUrl}/projects");
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             ProjectList result = JsonSerializer.Deserialize<ProjectList>(jsonString);
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
-#pragma warning disable CS8603 // Possible null reference return.
             return result;
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<Requirement> GetRequirementAsync(int projectId, int requirementId)
@@ -65,17 +62,13 @@ namespace EveriHelixAPI.Services.Impl
             HttpClient httpClient = new HttpClient(clientHandler);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer ", "bearer token here");
 
-            HttpResponseMessage response = await httpClient.GetAsync($"{HELIX_REST_URL}/{projectId}/requirement/{requirementId}?formattedText=true");
+            HttpResponseMessage response = await httpClient.GetAsync($"{helixConfig.BaseUrl}/{projectId}/requirement/{requirementId}?formattedText=true");
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             Requirement result = JsonSerializer.Deserialize<Requirement>(jsonString);
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
-#pragma warning disable CS8603 // Possible null reference return.
             return result;
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<RequirementList> GetRequirementsAsync(int projectId)
@@ -92,17 +85,13 @@ namespace EveriHelixAPI.Services.Impl
             HttpClient httpClient = new HttpClient(clientHandler);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer ", "bearer token here");
 
-            HttpResponseMessage response = await httpClient.GetAsync($"{HELIX_REST_URL}/{projectId}/requirements?page=1&per_page=300&formattedText=true");
+            HttpResponseMessage response = await httpClient.GetAsync($"{helixConfig.BaseUrl}/{projectId}/requirements?page=1&per_page=300&formattedText=true");
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             RequirementList result = JsonSerializer.Deserialize<RequirementList>(jsonString);
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
-#pragma warning disable CS8603 // Possible null reference return.
             return result;
-#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }

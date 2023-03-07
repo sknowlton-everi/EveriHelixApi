@@ -7,6 +7,8 @@ Log.Information("Starting up");
 try
 {
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+    builder.bindConfig();
+
     builder.Logging.ClearProviders();
 
     builder.Host.UseSerilog((x, y) => y.WriteTo.Console().ReadFrom.Configuration(x.Configuration));
@@ -29,7 +31,6 @@ try
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
-    //app.UseHelix();
     app.Run();
 }
 catch (Exception ex)
