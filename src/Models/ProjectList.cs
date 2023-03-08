@@ -12,6 +12,6 @@
         public IList<Project> projects { get; set; } = new List<Project>();
         public int projectsLoading { get; set; } = 0;
 
-        public Token accessToken { get; set; };
+        public Token accessToken { get; set; }
     }
 }
