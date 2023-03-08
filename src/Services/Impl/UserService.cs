@@ -24,9 +24,9 @@ namespace EveriHelixAPI.Services.Impl
             return authenticateWithHelix(username, password);
         }
 
-        public Task<Token> AuthenticateAsync(int projectId, string username, string password)
+        public Task<Token> GetTokenAsync(UserCredentials credentials)
         {
-            return getAccessToken(projectId, username, password);
+            return getAccessToken(credentials.projectId, credentials.username, credentials.password);
         }
 
         private async Task<ProjectList> authenticateWithHelix(string username, string password)

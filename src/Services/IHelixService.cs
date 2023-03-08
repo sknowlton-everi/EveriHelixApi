@@ -1,4 +1,6 @@
 ﻿using EveriHelixAPI.Models;
+using EveriHelixAPI.Services.Impl;
+using System.Net;
 
 namespace EveriHelixAPI.Services
 {

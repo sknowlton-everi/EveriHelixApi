@@ -15,10 +15,26 @@ namespace EveriHelixAPI.Controllers.v1
     public class ProjectController : ControllerBase
     {
         private readonly IHelixService helixService;
+        private readonly IUserService userService;
 
-        public ProjectController(IHelixService helixService)
+        public ProjectController(IHelixService helixService, IUserService userService)
         {
             this.helixService = helixService;
+            this.userService = userService;
+        }
+
+        [HttpPost("login")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(IList<ProjectList>), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> LoginAsync(UserCredentials credentials)
+        {
+            Log.Debug($"Executing {new StackTrace().Caller}...");
+
+            Token result = await userService.GetTokenAsync(credentials);
+
+            return Ok(result);
         }
 
         [HttpGet("projects")]
@@ -26,7 +42,7 @@ namespace EveriHelixAPI.Controllers.v1
         [ProducesResponseType(typeof(IList<ProjectList>), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetProjectsAsync()
         {
             Log.Debug($"Executing {new StackTrace().Caller}...");
 
