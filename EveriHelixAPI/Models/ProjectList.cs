@@ -1,6 +1,5 @@
 ﻿namespace EveriHelixAPI.Models
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Project
     {
         public int id { get; set; } = 0;

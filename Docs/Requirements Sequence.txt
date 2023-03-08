@@ -1,0 +1,13 @@
+title Interacting with Requirements Sequence
+
+
+Actor->EveriHelixAPI:GET {projectId}/requirements
+EveriHelixAPI->Actor:200 Ok (RequirementList)
+Actor->EveriHelixAPI:GET {projectId}/requirements/{requirementId}
+EveriHelixAPI->Actor:200 Ok (Requirement)
+Actor->EveriHelixAPI:POST {projectId}/requirements
+EveriHelixAPI->Actor:201 Created (Requirement)
+Actor->EveriHelixAPI:PUT {projectId}/requirements
+EveriHelixAPI->Actor:200 Ok (RequirementList)
+Actor->EveriHelixAPI:DELETE {projectId}/requirements
+EveriHelixAPI->Actor:204 No Content

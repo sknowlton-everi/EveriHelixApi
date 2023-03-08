@@ -1,6 +1,5 @@
 ﻿namespace EveriHelixAPI.Models
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Token
     {
         public string tokenType { get; set; } = string.Empty;

@@ -1,0 +1,5 @@
+title Login and Getting list of Projects Sequence
+
+Actor->EveriHelixAPI:GET projects/{username}/{password}
+EveriHelixAPI->Actor:200 OK (ProjectList)
+note over Actor,EveriHelixAPI:JSON will contain the **access token** added to the header in all subsequent calls
