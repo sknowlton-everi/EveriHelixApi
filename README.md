@@ -1,5 +1,5 @@
 # EveriHelixApi
-[![.NET](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/dotnet.yml)
+[![.NET Core Desktop](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/dotnet-desktop.yml)
 [![CodeQL](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/codeql.yml/badge.svg)](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/codeql.yml)
 [![Code Inspector](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/codeinspect.yml/badge.svg)](https://github.com/sknowlton-everi/EveriHelixApi/actions/workflows/codeinspect.yml)
 
