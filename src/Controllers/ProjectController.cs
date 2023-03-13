@@ -25,7 +25,7 @@ namespace EveriHelixAPI.Controllers.v1
 
         [HttpPost("login")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(IList<ProjectList>), 200)]
+        [ProducesResponseType(typeof(Token), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> LoginAsync(UserCredentials credentials)
@@ -39,7 +39,7 @@ namespace EveriHelixAPI.Controllers.v1
 
         [HttpGet("projects")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(IList<ProjectList>), 200)]
+        [ProducesResponseType(typeof(ProjectList), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetProjectsAsync()
